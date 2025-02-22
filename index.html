@@ -1,0 +1,200 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+      <title>Family Tree</title>
+      <link rel="stylesheet" href="style.css">
+  <body>
+          <script src="https://d3js.org/d3.v7.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@3.1.0"></script>
+          <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
+
+
+<!--Name Search Bar -->
+
+    <div class="search">
+          <input
+            type="search"
+            placeholder="search by name"
+            oninput="filterChart(event)"
+          />
+    </div>
+
+<!--Expand & Collapse Buttons -->
+    <div class="button">
+            <button onclick="chart.expandAll().fit()">Expand All</button>
+            <button onclick="chart.collapseAll().fit()">Collapse All</button>
+    </div>
+
+
+
+<div class="chart-container"></div>
+<script> var chart = null;
+
+  function filterChart(e) {
+    // Get input value
+    const value = e.srcElement.value;
+
+    // Clear previous higlighting
+    chart.clearHighlighting();
+
+    // Get chart nodes
+    const data = chart.data();
+
+    // Mark all previously expanded nodes for collapse
+    data.forEach((d) => (d._expanded = false));
+
+    // Loop over data and check if input value matches any name
+    data.forEach((d) => {
+      if (value != '' && d.name.toLowerCase().includes(value.toLowerCase())) {
+        // If matches, mark node as highlighted
+        d._highlighted = true;
+        d._expanded = true;
+      }
+    });
+
+    // Update data and rerender graph
+    chart.data(data).render().fit();
+
+    console.log('filtering chart', e.srcElement.value);
+  }
+
+
+
+// main data file //
+  d3.csv('https://raw.githubusercontent.com/Manikantag20/Family/main/Family%20names.csv')
+
+              .then((data) => {chart = new d3.OrgChart()
+              .compact(false)
+              .pagingStep((d) => 5)
+              .minPagingVisibleNodes((d) => 3)
+
+// Root line color change //
+              .linkUpdate(function (d, i, arr)
+                {d3.select(this)
+              .attr('stroke', (d) => d.data._upToTheRootHighlighted ? '#152785' : 'green')
+              .attr('stroke-width', (d) => d.data._upToTheRootHighlighted ? 3 : 1.5)
+              .attr('stroke-line', '3,3');
+              if (d.data._upToTheRootHighlighted) { d3.select(this).raise();}
+                })
+
+              .pagingButton((d, i, arr, state) => {const step = state
+              .pagingStep(d.parent);
+              const currentIndex = d.parent.data._pagingStep;
+              const diff = d.parent.data._directSubordinatesPaging - currentIndex;
+              const min = Math
+              .min(diff, step);
+
+// Show NEXT Aroow mark settings //
+        return `
+                   <div style="margin-top:50px;">
+                      <div style="display:flex;
+                      width:170px;
+                      border-radius:20px;
+                      padding:5px 15px;
+                      padding-bottom:4px;
+                      background-color:#ADD8E6">
+        <div><svg     width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.59 7.41L10.18 12L5.59 16.59L7 18L13 12L7 6L5.59 7.41ZM16 6H18V18H16V6Z"
+                          fill="red"
+                        stroke="green"/>
+              </svg>
+        </div>
+                    <div style="line-height:2"> Show next ${min}  nodes </div></div>
+                     </div>
+                `;
+  // closed Show NEXT Aroow mark settings //
+
+      })
+
+// Body frame //
+                    .nodeHeight((d) => 100 + 120)            // BOX height 85+35 //
+                    .nodeWidth((d) => 140 + 20)            // BOX width //
+                    .childrenMargin((d) => 50)
+                    .compactMarginBetween((d) => 35)
+                    .compactMarginPair((d) => 30)
+                    .neighbourMargin((a, b) => 20)
+                    .nodeContent(function (d, i, arr, state) {
+                      const color = '#FFFACD';
+                     const imageDiffVert = 25 + 2;
+
+
+        return `
+
+                          <div style='width:${d.width}px;
+                          height:${d.height}px;
+                          padding-top:${imageDiffVert - 2}px;
+                          padding-left:1px;
+                          padding-right:1px'>
+                      <div style="font-family: 'Inter', sans-serif;
+                           background-color:${color};
+                           margin-left:-1px;
+                           width:${d.width - 2}px;
+                           height:${d.height - imageDiffVert}px;
+                           border-radius:10px;
+                           border: ${d.data._highlighted || d.data._upToTheRootHighlighted ?
+                             '5px solid #E27396"' : '2px solid #800000"'} >
+
+               <div style="font-size:15px;
+                          color:#000080;
+                          margin-left:55px;
+                          margin-top:5px;"> ${d.data.relation} </div>
+
+
+                           <div style="display:flex;
+                           justify-content:flex-end;
+                           margin-top:15px;
+                           margin-right:3px">#${d.data.id}</div>
+
+                     <div style="background-color:${color};
+                               margin-top:${-imageDiffVert - 20}px;
+                              margin-left:${15}px;
+                              border-radius:100px;
+                             width:50px;
+                            height:50px;" ></div>
+
+
+                  <div style="margin-top:${-imageDiffVert - 0}px;">
+                            <img src=" ${d.data.image}"
+                            style="margin-left:${18}px;
+                            border-radius:5px;
+                            width:105px;
+                            height:95px;" /></div>
+
+                <div style="font-size:15px;
+                              color:#FF0000;
+                              margin-left:10px;
+                              margin-top:5px">  ${d.data.name} </div>
+
+                <div style="font-size:13px;
+                              color:#000080;
+                              margin-left:10px;
+                              margin-top:3px;"> ${d.data.position} </div>
+
+
+
+
+                        </div>
+                    </div>
+                            `;
+      })
+      .container('.chart-container')
+      .data(data)
+      .render();
+  });
+  // Comments //
+  // line 78 is the box shape  //
+  // line 84 is the box text up & down with photo (5)//
+  // line 85 is the right space under box (8)//
+  // line //
+  // line //
+  // line //
+
+</script>
+
+</body>
+</html>

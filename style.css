@@ -1,0 +1,39 @@
+h1, h2 {
+  font-family: Lato;
+}
+
+.Title h1{
+    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+    color: Red;
+    margin-left: 500px;
+}
+.button button {
+  color: red;
+  background: #FFDAB9;
+  font-size: 13px;
+  line-height: 1;
+  padding: 5px 8px;
+  margin-top: 15px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-style: italic;
+  font-weight: bold;
+
+}
+.search input{
+  color: black;
+  background: #00FFFF;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  margin-top: 6px;
+  margin-left: 10px;
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-style: italic;
+  border-color: #DC143C;
+}
