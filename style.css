@@ -37,14 +37,14 @@ footer {
 .footer-main {
     color: Black; /* Change to any color you like */
     font-weight: bold; /* Optional: Make it bold */
-    font-size: 12px;
+    font-size: 8px;
 }
 
 .footer-designer {
     color: #e60000; /* Change to another color */
     font-style: italic; /* Optional: Make it italic */
     font-weight: bold;
-    font-size: 12px;
+    font-size: 8px;
 }
 
 .buttonbox {
