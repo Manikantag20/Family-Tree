@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
       <title>Family Tree</title>
       <link rel="stylesheet" href="style.css">
@@ -17,13 +17,12 @@
 <!--Name Search Bar -->
 <div class="Header">
   <img src="https://github.com/Manikantag20/Family/blob/main/Family_images/logo%202.jpg?raw=true" alt="Logo" class="logo">
-   <p> Family Tree </p>
+   <p> FamilyTree </p>
 
 <div class="buttonbox">
-  <button onclick="chart.expandAll().fit()">Expand All</button>
+  <button onclick="chart.expandAll().fit()">Expand All</button> <br>
   <button onclick="chart.collapseAll().fit()">Collapse All</button>
 </div>
-
 
     <input
         type="search"
@@ -32,17 +31,12 @@
 
 </div>
 
-
-
-
 <!-- Connection line one person to another person-->
 <script>
   setTimeout(function() {
     chart.connections([{ from: "68", to: "86", label: "Conflicts of interest" }]).render();
 }, 1000);
 </script>
-
-
 
 <div class="chart-container"></div>
 <!-- Popup -->
@@ -82,9 +76,6 @@ function closePopup() {
     document.getElementById("overlay").style.display = "none";
 }
 
-
-
-
   function filterChart(e) {
     // Get input value
     const value = e.srcElement.value;
@@ -115,8 +106,6 @@ function closePopup() {
     console.log('filtering chart', e.srcElement.value);
   }
 
-
-
 // main data file //
   d3.csv('https://raw.githubusercontent.com/Manikantag20/Family/refs/heads/main/Family%20Names%20Copy.csv')
 
@@ -126,10 +115,6 @@ function closePopup() {
               .minPagingVisibleNodes((d) => 3)
               .container('.chart-container')
               .data(data)
-
-
-
-
 
 // Root line color change //
               .linkUpdate(function (d, i, arr)
