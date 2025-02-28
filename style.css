@@ -2,28 +2,27 @@ h1, h2 {
   font-family: Lato;
 }
 
-
 .Header {
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 10px;
+    gap: auto;
     padding: 10px;
     background: #fdf5e6;
-    height: 38px;
+    height: 60px;
 
 }
 .logo {
     width: 55px; /* Adjust logo size */
     height: 55px;
-    margin-left: 200px;
+    margin-left: 20px;
     border-radius: 60px;
 }
 .header p{
   color: red;
   font-style: italic; /* Optional: Make it italic */
   font-weight: bold;
-  font-size: 40px;
+  font-size: 20px;
   margin-left: 10px;
 }
 footer {
@@ -32,7 +31,7 @@ footer {
   height: 25px;
   padding: 0px;
   position: relative;
-  width: 98%;
+  width: auto%;
 }
 
 .footer-main {
@@ -54,11 +53,11 @@ footer {
 button {
   color: #00008b;
   background: white;
-  font-size: 18px;
+  font-size: 10px;
   line-height: 1;
-  padding: 6px 30px;
+  padding: 6px 10px;
   margin-top: 5px;
-  margin-left: 50px;
+  margin-left: 20px;
   border-radius: 10px;
   cursor: pointer;
   font-family: sans-serif;
@@ -73,9 +72,9 @@ input{
   font-size: 15px;
   font-weight: bold;
   line-height: 1;
-  padding: 5px 80px;
+  padding: 5px 40px;
   margin-top: 4px;
-  margin-left: 200px;
+  margin-left: 20px;
   border-radius: 10px;
   font-family: sans-serif;
   font-style: italic;
