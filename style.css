@@ -26,23 +26,25 @@ h1, h2 {
   margin-left: 10px;
 }
 footer {
-  background-color: #fdf5e6;
   text-align: center;
-  height: 25px;
-  padding: 0px;
+  height: 2px;
+  padding: 5px;
   position: relative;
+  margin-top: -35px;
   width: auto%;
 }
 
 .footer-main {
     color: Black; /* Change to any color you like */
     font-weight: bold; /* Optional: Make it bold */
+    font-size: 12px;
 }
 
 .footer-designer {
     color: #e60000; /* Change to another color */
     font-style: italic; /* Optional: Make it italic */
     font-weight: bold;
+    font-size: 12px;
 }
 
 .buttonbox {
@@ -53,7 +55,7 @@ footer {
 button {
   color: #00008b;
   background: white;
-  font-size: 10px;
+  font-size: 20px;
   line-height: 1;
   padding: 6px 10px;
   margin-top: 5px;
@@ -69,7 +71,7 @@ button {
 input{
   color: black;
   background: white;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: bold;
   line-height: 1;
   padding: 5px 20px;
